@@ -90,7 +90,7 @@ public class Product {
         Product.quantity = quantity;
     }
 
-   
+         
     public float getPrice() {
         return price;
     }
