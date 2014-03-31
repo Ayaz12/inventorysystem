@@ -29,6 +29,9 @@ public class Product {
    private static int quantity;
    private static String vendorName;
    private static int id;
+   private static String date;
+   private static int vendorID;
+   
    static List inventory = new ArrayList();
     
    static Connection conn = null;
@@ -49,7 +52,24 @@ public class Product {
     public Product() {
     }
 
-    public static void setId(int id) {
+    public static String getDate() {
+        return date;
+    }
+
+    public static int getVendorID() {
+        return vendorID;
+    }
+
+    public static void setDate(String date) {
+        Product.date = date;
+    }
+
+    public static void setVendorID(int vendorID) {
+        Product.vendorID = vendorID;
+    }
+    
+    
+   public static void setId(int id) {
         Product.id = id;
     }
 
@@ -162,20 +182,22 @@ public class Product {
          int id = input.nextInt();
          System.out.println("Enter Item name : ");
          String name = input.next();
-         System.out.println("Enter VendorName : ");
-         String vendorname = input.next();
          System.out.println("Enter Barcode : ");
          String barcode = input.next();
          System.out.println("Enter Price : ");
          float price = input.nextFloat();
          System.out.println("Enter quantity : ");
          int quantity = input.nextInt();
-         System.out.println("ID: "+id +" " + " Name: "+name +" "+ " VendorName: "+vendorname + " " + "Barcode: "+barcode + " " +"Price: "+price+" "+" Quantity: "+quantity);
+         System.out.println("Enter date : ");
+         String date = input.next();
+         System.out.println("Enter VendorID : ");
+         int vendorID = input.nextInt();
+         System.out.println("ID: "+id +" " + " Name: "+name +" "+ "Barcode: "+barcode +"VendorID: "+vendorID+ " " + "Date: "+date+" "+"Price: "+price+" "+" Quantity: "+quantity);
          
          stmt = conn.createStatement();
             
             sql = "INSERT INTO product(id,name,vendorname,barcode,price,quantity)"
-                 + " VALUES ('"+id+"','"+name+"','"+vendorname+"','"+barcode+"','"+price+"','"+quantity+"')";
+                 + " VALUES ('"+id+"','"+name+"','"+barcode+"','"+price+"','"+quantity+"','"+date+"','"+vendorID+"')";
                          
         stmt.executeUpdate(sql);  
          
@@ -218,7 +240,7 @@ public class Product {
        System.out.println("Successfully Record Deleted");
    }
     
-   public boolean askAgain()  
+  /* public boolean askAgain()  
     {  
         System.out.println("Press 1 to display menu again, press any other key to exit");  
         int ch = input.nextInt();  
@@ -227,7 +249,7 @@ public class Product {
         else   
             return false;  
     }
-   
+   */
     public static void main(String[] args) throws SQLException {
       
         Product product = new Product();
@@ -260,17 +282,19 @@ public class Product {
          int id  = rs.getInt("id");
          float price = rs.getFloat("price");
          String barcode = rs.getString("barcode");
-         String vendorname = rs.getString("vendorname");
          String name = rs.getString("name");
          int quantity = rs.getInt("quantity");
+         int vendorID = rs.getInt("vendorID");
+          String date = rs.getString("date");
 
          //Display values
          System.out.print("ID: " + id);
          System.out.print(" name: " + name);
-         System.out.print(" vendorname: " + vendorname);
          System.out.print(" barcode: " + barcode);
          System.out.print(" price: " + price);
          System.out.println(" quantity: " + quantity);
+         System.out.println(" vendorID: " + vendorID);
+         System.out.println(" date: " + date);
   }
       rs.close();
       stmt.close();
