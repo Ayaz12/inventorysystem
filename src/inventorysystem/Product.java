@@ -27,7 +27,6 @@ public class Product {
    private static String barcode;
    private static float price;
    private static int quantity;
-   private static String vendorName;
    private static int id;
    private static String date;
    private static int vendorID;
@@ -82,10 +81,7 @@ public class Product {
         return barcode;
     }
 
-     public static String getVendorName() {
-        return vendorName;
-    }
-
+     
     public static int getQuantity() {
         return quantity;
     }
@@ -94,10 +90,7 @@ public class Product {
         Product.quantity = quantity;
     }
 
-    public static void setVendorName(String vendorName) {
-        Product.vendorName = vendorName;
-    }
-     
+   
     public float getPrice() {
         return price;
     }
